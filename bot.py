@@ -110,6 +110,9 @@ async def interpolate(ctx, arg1="--model",arg2="cvp", arg3="x", arg4="x"):
     catboxurl = uploader_instance.execute()
     await ctx.send( content=f"{ctx.author.mention} {catboxurl}")
     os.remove("output.mkv")
-    os.remove("audio.mkv")
-    os.remove("output-audio.mkv")
+    try:
+        os.remove("audio.mkv")
+        os.remove("output-audio.mkv")
+    except:
+        pass
 bot.run("MTAzNTY3MzAyNTQxNDE4OTA1Nw.GiJe_B.H2ibKHDzaXbFTRqUhiZ6f2skH46gkfq6G83yCg")
