@@ -67,6 +67,7 @@ async def interpolate(ctx, arg1="--model",arg2="cvp", arg3="x", arg4="x"):
     
     if ytdl:
         downloadvideo(ytdlurl,"input")
+        downloadaudio(ytdlurl,"audio.m4a")
     else:
         downloadfromurl(urlname,"input.mkv")
         os.system("ffmpeg -i input.mkv -c:a copy -vn -y audio.mkv")
@@ -99,11 +100,13 @@ async def interpolate(ctx, arg1="--model",arg2="cvp", arg3="x", arg4="x"):
         os.remove("cain.engine")
     if os.path.isfile("audio.mkv"):
         os.system("ffmpeg -i output.mkv -i audio.mkv -c:v copy -b:a 256k output-audio.mkv")
-        
+    if os.path.isfile("audio.m4a"):
+        os.system("ffmpeg -i output.mkv -i audio.m4a -c copy output-audio.mkv")
+                
     await message.edit(content=f"Finished interpolation!✨\n")
     #upload
     uploader_class =  CatboxUploader
-    if os.path.isfile("audio.mkv"):
+    if os.path.isfile("output-audio.mkv"):
         uploader_instance = uploader_class(f"output-audio.mkv")
     else:
         uploader_instance = uploader_class(f"output.mkv")
@@ -111,8 +114,12 @@ async def interpolate(ctx, arg1="--model",arg2="cvp", arg3="x", arg4="x"):
     await ctx.send( content=f"{ctx.author.mention} {catboxurl}")
     os.remove("output.mkv")
     try:
-        os.remove("audio.mkv")
         os.remove("output-audio.mkv")
+        os.remove("audio.mkv")
+    except:
+        pass
+    try:
+         os.remove("audio.m4a")
     except:
         pass
 bot.run("MTAzNTY3MzAyNTQxNDE4OTA1Nw.GiJe_B.H2ibKHDzaXbFTRqUhiZ6f2skH46gkfq6G83yCg")

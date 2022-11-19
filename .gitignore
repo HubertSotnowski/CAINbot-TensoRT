@@ -5,3 +5,9 @@
 *.pyc
 *.mkv
 *.engine
+audio
+*.lwi
+*.lwi
+input.mkv.lwi
+*.onnx
+*.onnx

@@ -34,3 +34,13 @@ def downloadfromurl(url,name):
         return "too big!!!!"   
         
     open(name, "wb").write(response.content)
+def downloadaudio(url,name):
+    ydl_opts = {
+        'outtmpl': name,
+        'format': 'm4a/bestaudio/best',
+        # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
+
+    }
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        error_code = ydl.download(url)
