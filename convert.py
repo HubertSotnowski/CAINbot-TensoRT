@@ -6,8 +6,10 @@ my_parser.add_argument("--output", metavar="--output", type=str, help="output mo
 my_parser.add_argument("--height", metavar="--height", type=int, help="height")
 my_parser.add_argument("--width", metavar="--width", type=int, help="width")
 args = my_parser.parse_args()
-
-from cain.cain import CAIN
+if args.input=="rvp.pth":
+    from cain.rvp import CAIN
+else:
+    from cain.cain import CAIN
 import torch
 import os
 
